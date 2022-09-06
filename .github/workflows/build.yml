@@ -15,5 +15,5 @@ jobs:
       skip-format: true
       skip-lint: true
     secrets:
-      ssh-private-key: ${{ secrets.I_DONT_EXIST }}
+      ssh-private-key: "${{ secrets.I_DONT_EXIST }}"
       codecov-token: ${{ secrets.CODECOV_TOKEN }}
