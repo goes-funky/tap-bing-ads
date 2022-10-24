@@ -15,15 +15,33 @@ REPORT_WHITELIST = [
 REPORT_REQUIRED_FIELDS = ['_sdc_report_datetime', 'AccountId', 'TimePeriod', 'Id']
 
 REPORT_SPECIFIC_REQUIRED_FIELDS = {
-    'GeographicPerformanceReport': ['AccountName'],
+    'GeographicPerformanceReport': ['AccountName', 'Impressions', 'Clicks', 'Spend', 'AverageCpc', 'TimePeriod'],
+    'AdPerformanceReport': ['AccountName', 'Impressions', 'Clicks', 'Spend', 'AverageCpc', 'TimePeriod'],
+    'KeywordPerformanceReport': ['AccountName', 'Impressions', 'Clicks', 'Spend', 'AverageCpc', 'TimePeriod'],
     'AgeGenderDemographicReport': [
         'AccountName',
         'AdGroupName',
         'AgeGroup',
-        'Gender'
+        'Gender',
+        'Impressions',
+        'Clicks',
+        'Spend',
+        'AverageCpc',
+        'TimePeriod'
     ],
-    'SearchQueryPerformanceReport': ['SearchQuery'],
-    'AudiencePerformanceReport': ['AudienceId'],
+    'AgeGenderAudienceReport': [
+        'AccountName',
+        'AdGroupName',
+        'AgeGroup',
+        'Gender',
+        'Impressions',
+        'Clicks',
+        'Spend',
+        'AverageCpc',
+        'TimePeriod'
+    ],
+    'SearchQueryPerformanceReport': ['SearchQuery', 'TimePeriod', 'Impressions', 'Clicks', 'Ctr', 'AveragePosition'],
+    'AudiencePerformanceReport': ['AudienceId', 'Impressions', 'Clicks', 'Spend', 'AverageCpc', 'TimePeriod'],
     'AdExtensionDetailReport': [
         'AdExtensionId',
         'AdExtensionPropertyValue',
@@ -33,7 +51,10 @@ REPORT_SPECIFIC_REQUIRED_FIELDS = {
         'Ctr',
         'Impressions'
     ],
-    'GoalsAndFunnelsReport': ['Goal']
+    'GoalsAndFunnelsReport': ['Goal', 'AllRevenue', 'Spend', 'AllConversions', 'TimePeriod'],
+    "PublisherUsagePerformanceReport" : [ 'AccountName', 'CampaignName', 'PublisherUrl', 'TimePeriod', 'Impressions', 'Clicks', 'Spend', 'Conversions'],
+    "CampaignPerformanceReport" : ['Impressions', 'Clicks', 'Spend', 'AverageCpc', 'TimePeriod', 'ImpressionSharePercent'],
+    "AdGroupPerformanceReport" : ['Impressions', 'Clicks', 'Spend', 'AverageCpc', 'TimePeriod', 'ImpressionSharePercent'],
 }
 
 ## Any not listed here are strings
