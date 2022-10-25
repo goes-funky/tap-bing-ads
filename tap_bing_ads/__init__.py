@@ -548,12 +548,13 @@ def get_selected_fields(catalog_item, exclude=None):
         if prop not in exclude and \
            ((catalog_item.key_properties and prop in catalog_item.key_properties) or \
             metadata.get(mdata, ('properties', prop), 'inclusion') == 'automatic' or \
-            metadata.get(mdata, ('properties', prop), 'selected') is True):
+            metadata.get(mdata, ('properties', prop), 'selected') is True and \
+            prop not in list(invalid_selections.keys())):
             selected_fields.append(prop)
 
     if any(invalid_selections):
         singer.log_warning("Invalid selections for field(s) - {{ FieldName: [IncompatibleFields] }}:\n{}".format(json.dumps(invalid_selections, indent=4)))
-        exit(42)  # exit silently without reporting to sentry
+        # exit(42)  # exit silently without reporting to sentry
     return selected_fields
 
 def filter_selected_fields(selected_fields, obj):
