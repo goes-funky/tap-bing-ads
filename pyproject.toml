@@ -14,7 +14,7 @@ authors = ["y42 developers <info@y42.com>"]
 [tool.poetry.dependencies]
 python = "^3.9"
 arrow = "0.12.0"
-bingads = "13.0.3"
+bingads = "13.0.10"
 singer-python= "5.9.0"
 requests = "2.26.0"
 tenacity = "8.0.1"
