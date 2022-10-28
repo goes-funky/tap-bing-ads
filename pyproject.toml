@@ -20,7 +20,7 @@ requests = "2.26.0"
 tenacity = "8.0.1"
 stringcase = "1.2.0"
 backoff = "1.8.0"
-setuptools = "57.5.0"
+
 
 [tool.poetry.dev-dependencies]
 integrations-testing-framework = {git = "git@github.com:goes-funky/integrations-testing-framework.git"}
@@ -29,6 +29,7 @@ mypy = "0.910"
 pylint = "2.11.1"
 pytest = "6.2.4"
 coverage = "^6.4.2"
+setuptools = "57.5.0"
 
 [tool.pytest.ini_options]
 testpaths = [
