@@ -10,6 +10,7 @@ jobs:
     with:
       python-version: "3.9"
       skip-mypy: true
+      is-repo-public: true
       skip-tests: false
       skip-isort: true
       skip-format: true
