@@ -54,7 +54,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 
 [[package]]
 name = "bingads"
-version = "13.0.10"
+version = "13.0.11.1"
 description = "A library to make working with the Bing Ads APIs and bulk services easy"
 category = "main"
 optional = false
@@ -64,7 +64,7 @@ python-versions = "*"
 future = "*"
 requests = "*"
 six = "*"
-suds-jurko = "0.6.0"
+suds-community = ">=1.0.0b1"
 
 [[package]]
 name = "certifi"
@@ -474,12 +474,12 @@ optional = false
 python-versions = "*"
 
 [[package]]
-name = "suds-jurko"
-version = "0.6"
-description = "Lightweight SOAP client (Jurko's fork)"
+name = "suds-community"
+version = "1.1.2"
+description = "Lightweight SOAP client (community fork)"
 category = "main"
 optional = false
-python-versions = "*"
+python-versions = ">=3.5"
 
 [[package]]
 name = "tenacity"
@@ -570,7 +570,7 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "94a0f7d51bb530ef7c21fadedb960710ecae6c4ae3cd8f8a9eebea95a5c129fa"
+content-hash = "a94588335f8cff1871acccaf778eb1c4c4685ac5c0e070352b025f24725bb858"
 
 [metadata.files]
 arrow = [
@@ -592,7 +592,7 @@ backoff = [
     {file = "backoff-1.8.0.tar.gz", hash = "sha256:c7187f15339e775aec926dc6e5e42f8a3ad7d3c2b9a6ecae7b535000f70cd838"},
 ]
 bingads = [
-    {file = "bingads-13.0.10.zip", hash = "sha256:77323332f84f78cf8fc9a076ee82439010658c47118e6e01670947a6b821df09"},
+    {file = "bingads-13.0.11.1.zip", hash = "sha256:d063e68d71a97366fd9290ef9ba098fd81d1481e52b433318310b7f3eefdefc7"},
 ]
 certifi = [
     {file = "certifi-2022.9.24-py3-none-any.whl", hash = "sha256:90c1a32f1d68f940488354e36370f6cca89f0f106db09518524c88d6ed83f382"},
@@ -965,9 +965,9 @@ six = [
 stringcase = [
     {file = "stringcase-1.2.0.tar.gz", hash = "sha256:48a06980661908efe8d9d34eab2b6c13aefa2163b3ced26972902e3bdfd87008"},
 ]
-suds-jurko = [
-    {file = "suds-jurko-0.6.tar.bz2", hash = "sha256:29edb72fd21e3044093d86f33c66cf847c5aaab26d64cb90e69e528ef014e57f"},
-    {file = "suds-jurko-0.6.zip", hash = "sha256:1cb7252cb13018fc32887c3a834ed7c6648a5b5c4c159be5806da2e1785399e8"},
+suds-community = [
+    {file = "suds-community-1.1.2.tar.gz", hash = "sha256:883b4173ad23e7b20e9779ac7238b06140c50d7852afd5dc49dad1ea5f5a3d08"},
+    {file = "suds_community-1.1.2-py3-none-any.whl", hash = "sha256:18a0176bf4f5945e133024faa57c35c3d7320e02f6b84bfe95baa6ddf5e05cec"},
 ]
 tenacity = [
     {file = "tenacity-8.0.1-py3-none-any.whl", hash = "sha256:f78f4ea81b0fabc06728c11dc2a8c01277bfc5181b321a4770471902e3eb844a"},
