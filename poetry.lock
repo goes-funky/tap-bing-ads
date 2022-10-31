@@ -474,6 +474,14 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "suds-community"
+version = "1.0.0b1"
+description = "Lightweight SOAP client (community fork)"
+category = "main"
+optional = false
+python-versions = ">=3.5"
+
+[[package]]
 name = "suds-jurko"
 version = "0.6"
 description = "Lightweight SOAP client (Jurko's fork)"
@@ -570,7 +578,7 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "94a0f7d51bb530ef7c21fadedb960710ecae6c4ae3cd8f8a9eebea95a5c129fa"
+content-hash = "157b49adddbbf44a898597a57091206da9d08493df9de67aa862294cb4e263cc"
 
 [metadata.files]
 arrow = [
@@ -964,6 +972,10 @@ six = [
 ]
 stringcase = [
     {file = "stringcase-1.2.0.tar.gz", hash = "sha256:48a06980661908efe8d9d34eab2b6c13aefa2163b3ced26972902e3bdfd87008"},
+]
+suds-community = [
+    {file = "suds-community-1.0.0b1.tar.gz", hash = "sha256:9f6be771fcb5f85eaf55724defbd0fa019562eb11455ee5003f62ddce8c4cac3"},
+    {file = "suds_community-1.0.0b1-py3-none-any.whl", hash = "sha256:adebbe131a408fd7bdad4730e502e461fecf9cb0f34f828dce447cc63dbfe9f9"},
 ]
 suds-jurko = [
     {file = "suds-jurko-0.6.tar.bz2", hash = "sha256:29edb72fd21e3044093d86f33c66cf847c5aaab26d64cb90e69e528ef014e57f"},
