@@ -14,7 +14,7 @@ authors = ["y42 developers <info@y42.com>"]
 [tool.poetry.dependencies]
 python = "^3.9"
 arrow = "0.12.0"
-bingads = "13.0.10"
+bingads = "13.0.11.1"
 singer-python= "5.9.0"
 requests = "2.26.0"
 tenacity = "8.0.1"
@@ -23,7 +23,7 @@ backoff = "1.8.0"
 
 
 [tool.poetry.dev-dependencies]
-integrations-testing-framework = {git = "git@github.com:goes-funky/integrations-testing-framework.git"}
+integrations-testing-framework = {git = "http://github.com/goes-funky/integrations-testing-framework.git"}
 pdoc3 = "0.10.0"
 mypy = "0.910"
 pylint = "2.11.1"
