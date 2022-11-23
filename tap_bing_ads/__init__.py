@@ -520,8 +520,8 @@ def test_credentials(account_ids):
     if not account_ids:
         raise Exception('At least one id in account_ids is required to test authentication')
 
-        # don't write secrets while discovery
-        create_sdk_client('CustomerManagementService', account_ids[0], discovery=True)
+    # don't write secrets while discovery
+    create_sdk_client('CustomerManagementService', account_ids[0], discovery=True)
 
 def do_discover(account_ids):
     logging.info('Testing authentication')
