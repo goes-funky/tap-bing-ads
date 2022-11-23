@@ -151,7 +151,7 @@ class CustomServiceClient(ServiceClient):
         kwargs['headers']['User-Agent'] = get_user_agent()
         self._soap_client.set_options(**kwargs)
 
-def create_sdk_client(service, account_id):
+def create_sdk_client(service, account_id, discovery=None):
     logging.info('Creating SOAP client with OAuth refresh credentials for service: %s, account_id %s',
                 service, account_id)
 
@@ -162,7 +162,9 @@ def create_sdk_client(service, account_id):
         CONFIG['oauth_client_secret'],
         '') ## redirect URL not needed for refresh token
 
-    authentication.request_oauth_tokens_by_refresh_token(CONFIG['refresh_token'])
+    auth_tokens = authentication.request_oauth_tokens_by_refresh_token(CONFIG['refresh_token'])
+    if discovery != True:
+        write_secrets(auth_tokens)
 
     authorization_data = AuthorizationData(
         account_id=account_id,
@@ -171,6 +173,20 @@ def create_sdk_client(service, account_id):
         authentication=authentication)
 
     return CustomServiceClient(service, authorization_data=authorization_data)
+
+def write_secrets(auth_tokens) -> None:
+
+    CONFIG['refresh_token'] = auth_tokens.refresh_token
+    CONFIG['access_token'] = auth_tokens.access_token
+    secrets = {
+        "type": "CREDENTIALS_CHANGED",
+        "secret": CONFIG
+    }
+    message = json.dumps(secrets)
+    sys.stdout.write(message)
+    sys.stdout.write("\n")
+    sys.stdout.flush()
+
 
 def sobject_to_dict(obj):
     if not hasattr(obj, '__keylist__'):
@@ -503,8 +519,8 @@ def discover_reports():
 def test_credentials(account_ids):
     if not account_ids:
         raise Exception('At least one id in account_ids is required to test authentication')
-    
-    create_sdk_client('CustomerManagementService', account_ids[0])
+    #don't write secrets while discovery
+    create_sdk_client('CustomerManagementService', account_ids[0], discovery=True)
 
 def do_discover(account_ids):
     logging.info('Testing authentication')
