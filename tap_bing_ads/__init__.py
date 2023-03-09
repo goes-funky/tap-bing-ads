@@ -387,7 +387,7 @@ def get_stream_def(stream_name, schema, stream_metadata=None, pks=None, replicat
         stream_def['metadata'] = stream_metadata
     else:
         stream_def['metadata'] = list(map(
-          lambda field: {"metadata": {"inclusion": "available"}, "breadcrumb": ["properties", field]},
+          lambda field: {"metadata": {}, "breadcrumb": ["properties", field]},
           (schema['properties'].keys() - excluded_inclusion_fields)))
     stream_def['metadata'].append({
         'breadcrumb': [],
@@ -465,7 +465,7 @@ def metadata_fn(report_name, field, required_fields):
     if field in required_fields:
         mdata = {"metadata": {"inclusion": "automatic"}, "breadcrumb": ["properties", field]}
     else:
-        mdata = {"metadata": {"inclusion": "available"}, "breadcrumb": ["properties", field]}
+        mdata = {"metadata": {}, "breadcrumb": ["properties", field]}
 
     if EXCLUSIONS.get(report_name):
         for group_set in EXCLUSIONS[report_name]:
