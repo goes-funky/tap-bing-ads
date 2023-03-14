@@ -177,11 +177,18 @@ def create_sdk_client(service, account_id, discovery = None):
 
 def write_secrets(auth_tokens) -> None:
 
-    CONFIG['refresh_token'] = auth_tokens.refresh_token
-    CONFIG['access_token'] = auth_tokens.access_token
+    related_config = {}
+
+    related_config['refresh_token'] = auth_tokens.refresh_token
+    related_config['access_token'] = auth_tokens.access_token
+
+    related_config['expires_in'] = CONFIG.get('expires_in', None)
+    related_config['scope'] = CONFIG.get('scope', None)
+    related_config['token_type'] = CONFIG.get('token_type', None)
+
     secrets = {
         "type": "CREDENTIALS_CHANGED",
-        "secret": CONFIG
+        "secret": related_config
     }
     message = json.dumps(secrets)
     sys.stdout.write(message)
