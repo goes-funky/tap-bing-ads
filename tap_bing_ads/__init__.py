@@ -177,11 +177,18 @@ def create_sdk_client(service, account_id, discovery = None):
 
 def write_secrets(auth_tokens) -> None:
 
-    CONFIG['refresh_token'] = auth_tokens.refresh_token
-    CONFIG['access_token'] = auth_tokens.access_token
+    related_config = {}
+
+    related_config['refresh_token'] = auth_tokens.refresh_token
+    related_config['access_token'] = auth_tokens.access_token
+
+    related_config['expires_in'] = CONFIG.get('expires_in', None)
+    related_config['scope'] = CONFIG.get('scope', None)
+    related_config['token_type'] = CONFIG.get('token_type', None)
+
     secrets = {
         "type": "CREDENTIALS_CHANGED",
-        "secret": CONFIG
+        "secret": related_config
     }
     message = json.dumps(secrets)
     sys.stdout.write(message)
@@ -387,7 +394,7 @@ def get_stream_def(stream_name, schema, stream_metadata=None, pks=None, replicat
         stream_def['metadata'] = stream_metadata
     else:
         stream_def['metadata'] = list(map(
-          lambda field: {"metadata": {"inclusion": "available"}, "breadcrumb": ["properties", field]},
+          lambda field: {"metadata": {}, "breadcrumb": ["properties", field]},
           (schema['properties'].keys() - excluded_inclusion_fields)))
     stream_def['metadata'].append({
         'breadcrumb': [],
@@ -465,7 +472,7 @@ def metadata_fn(report_name, field, required_fields):
     if field in required_fields:
         mdata = {"metadata": {"inclusion": "automatic"}, "breadcrumb": ["properties", field]}
     else:
-        mdata = {"metadata": {"inclusion": "available"}, "breadcrumb": ["properties", field]}
+        mdata = {"metadata": {}, "breadcrumb": ["properties", field]}
 
     if EXCLUSIONS.get(report_name):
         for group_set in EXCLUSIONS[report_name]:
