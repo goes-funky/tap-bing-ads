@@ -9,6 +9,7 @@ jobs:
     uses: goes-funky/workflows/.github/workflows/build-python.yaml@master
     with:
       python-version: "3.9"
+      poetry-version: "1.3.2"
       skip-mypy: true
       is-repo-public: true
       skip-tests: false
