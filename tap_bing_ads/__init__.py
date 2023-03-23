@@ -1032,6 +1032,7 @@ async def do_sync_all_accounts(account_ids, catalog):
     await asyncio.gather(*sync_account_data_tasks)
 
 async def main_impl():
+    logging.info("Bookmark 2: Called main_impl")
     args = utils.parse_args(REQUIRED_CONFIG_KEYS)
 
     CONFIG.update(args.config)
@@ -1049,7 +1050,9 @@ async def main_impl():
 
 def main():
     try:
+        logging.info("Started tap")
         loop = asyncio.get_event_loop()
+        logging.info("Bookmark 1: Event loop created")
         loop.run_until_complete(main_impl())
     except Exception as exc:
         logging.critical(exc)
