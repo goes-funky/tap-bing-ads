@@ -7,7 +7,7 @@ extend-ignore = "E203"
 
 [tool.poetry]
 name = "tap-bing-ads"
-version = "2.0.16"
+version = "2.0.17"
 description = "A tap to connect to Bing Ads"
 authors = ["y42 developers <info@y42.com>"]
 
