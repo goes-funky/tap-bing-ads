@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import asyncio
+import ssl
 from http.client import RemoteDisconnected
 import json
 import csv
@@ -61,7 +62,8 @@ RETRY_STRATEGY = {
     "wait": wait_exponential(multiplier=10),
     "retry": (
             retry_if_exception_type(RetryException) |
-            retry_if_exception_type(requests.ReadTimeout)
+            retry_if_exception_type(requests.ReadTimeout) |
+            retry_if_exception_type(ssl.SSLError)
     ),
     "after": after_log(logging.getLogger("RetryStrategy"), logging.INFO),
 }
