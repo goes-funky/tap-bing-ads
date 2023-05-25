@@ -21,6 +21,9 @@ tenacity = "8.0.1"
 stringcase = "1.2.0"
 backoff = "1.8.0"
 
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.dev-dependencies]
 integrations-testing-framework = {git = "http://github.com/goes-funky/integrations-testing-framework.git"}
