@@ -118,13 +118,18 @@ class InvalidDateRangeEnd(Exception):
     pass
 
 
+def modify_exception_logging(error_list):
+    error_obj = error_list[0]
+
+    return f"{error_obj.ErrorCode}: {error_obj.Message}"
+
+
 def log_service_call(service_method, account_id):
     def wrapper(*args, **kwargs):
         log_args = list(map(lambda arg: str(arg).replace('\n', '\\n'), args)) + \
                    list(map(lambda kv: '{}={}'.format(*kv), kwargs.items()))
-        logging.info('Calling: {}({}) for account: {}'.format(
+        logging.info('Calling: {} for account: {}'.format(
             service_method.name,
-            ','.join(log_args),
             account_id))
         with metrics.http_request_timer(service_method.name):
             try:
@@ -136,11 +141,11 @@ def log_service_call(service_method, account_id):
                     invalid_date_range_end_errors = [oe for (_, oe) in operation_errors
                                                      if oe.ErrorCode == 'InvalidCustomDateRangeEnd']
                     if any(invalid_date_range_end_errors):
-                        raise InvalidDateRangeEnd(invalid_date_range_end_errors) from e
+                        raise InvalidDateRangeEnd(modify_exception_logging(invalid_date_range_end_errors)) from e
                     logging.info('Caught exception for account: {}'.format(account_id))
-                    raise Exception(operation_errors) from e
+                    raise Exception(modify_exception_logging(operation_errors)) from e
                 if hasattr(e.fault.detail, 'AdApiFaultDetail'):
-                    raise Exception(e.fault.detail.AdApiFaultDetail.Errors) from e
+                    raise Exception(modify_exception_logging(e.fault.detail.AdApiFaultDetail.Errors)) from e
 
     return wrapper
 
@@ -172,7 +177,7 @@ def create_sdk_client(service, account_id, discovery=None):
         '')  ## redirect URL not needed for refresh token
 
     auth_tokens = authentication.request_oauth_tokens_by_refresh_token(CONFIG['refresh_token'])
-    if discovery != True:
+    if not discovery:
         write_secrets(auth_tokens)
 
     authorization_data = AuthorizationData(
@@ -601,13 +606,13 @@ def get_selected_fields(catalog_item, exclude=None):
         if prop not in exclude and \
                 ((catalog_item.key_properties and prop in catalog_item.key_properties) or \
                  metadata.get(mdata, ('properties', prop), 'inclusion') == 'automatic' or \
-                 metadata.get(mdata, ('properties', prop), 'selected') is True and \
+                 metadata.get(mdata, ('properties', prop), 'selected') is not True and \
                  prop not in list(invalid_selections.keys())):
             selected_fields.append(prop)
 
     if any(invalid_selections):
-        logging.info("Invalid selections for field(s) - {{ FieldName: [IncompatibleFields] }}:\n{}".format(
-            json.dumps(invalid_selections, indent=4)))
+        logging.info("Invalid selections for field(s) - {{ FieldName: [IncompatibleFields] }}: {}".format(
+            invalid_selections))
         # exit(42)  # exit silently without reporting to sentry
     return selected_fields
 
