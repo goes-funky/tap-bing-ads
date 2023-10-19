@@ -606,7 +606,7 @@ def get_selected_fields(catalog_item, exclude=None):
         if prop not in exclude and \
                 ((catalog_item.key_properties and prop in catalog_item.key_properties) or \
                  metadata.get(mdata, ('properties', prop), 'inclusion') == 'automatic' or \
-                 metadata.get(mdata, ('properties', prop), 'selected') is not True and \
+                 metadata.get(mdata, ('properties', prop), 'selected') is True and \
                  prop not in list(invalid_selections.keys())):
             selected_fields.append(prop)
 
